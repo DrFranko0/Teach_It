@@ -1,8 +1,17 @@
+from pydantic_ai.models.openai import OpenAIModel
+from pydantic_ai.providers.openai import OpenAIProvider
 import os
 from dotenv import load_dotenv
-
 load_dotenv()
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+TogetherAPIKey = os.getenv('TogetherAPIKey')
+if not TogetherAPIKey:
+    raise ValueError("API key not found. Please set 'TogetherAPIKey' in your .env file.")
 
-MODEL_NAME = "google-gla:gemini-2.0-flash"
+model = OpenAIModel(
+    'meta-llama/Llama-3.3-70B-Instruct-Turbo-Free',
+    provider=OpenAIProvider(
+        base_url='https://api.together.xyz/v1',
+        api_key=TogetherAPIKey,
+    ),
+)

@@ -3,7 +3,7 @@ from typing import List
 
 from pydantic_ai import Agent, RunContext, Tool
 from models.schemas import Reference, CodeInstruction, UserRequest
-from config import MODEL_NAME
+from config import model
 
 @dataclass
 class ReferenceDependencies:
@@ -11,7 +11,7 @@ class ReferenceDependencies:
     instructions: CodeInstruction
 
 reference_agent = Agent(
-    MODEL_NAME,
+    model,
     deps_type=ReferenceDependencies,
     output_type=List[Reference],
     system_prompt=(

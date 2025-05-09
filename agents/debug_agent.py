@@ -3,7 +3,7 @@ from typing import List
 
 from pydantic_ai import Agent, RunContext
 from models.schemas import DebugSuggestion, CodeInstruction, UserRequest
-from config import MODEL_NAME
+from config import model
 
 @dataclass
 class DebugDependencies:
@@ -11,7 +11,7 @@ class DebugDependencies:
     instructions: CodeInstruction
 
 debug_agent = Agent(
-    MODEL_NAME,
+    model,
     deps_type=DebugDependencies,
     output_type=List[DebugSuggestion],
     system_prompt=(
